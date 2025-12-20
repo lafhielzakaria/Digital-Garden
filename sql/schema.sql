@@ -2,12 +2,12 @@ create DATABASE DigitalGarden;
 use digitalgarden;
 create table users(
  id int PRIMARY key AUTO_INCREMENT,
-  email varchar (20) UNIQUE,
+  userName varchar(40) UNIQUE,
    userpassword varchar (33)
 );
 create table themes(
  id int PRIMARY key AUTO_INCREMENT,
-  color varchar (10),
+  color varchar (10) not null,
    userId Int ,
     FOREIGN key (userId) REFERENCES users (id)
 );
@@ -15,7 +15,7 @@ create table notes(
  id int PRIMARY key AUTO_INCREMENT,
   title varchar (10) UNIQUE,
    themeId Int ,
-    content text,
+    content text not null,
     FOREIGN key (themeId) REFERENCES themes (id),
     important int 
 );
@@ -34,3 +34,7 @@ delete from users;
 select * from users
 insert into users (id,userName,email,userPassword)
 values (1,"zakaria","lafhielzakaria@gmail.com","zikoow");
+delete from users;
+alter table users
+drop column email;
+SELECT * from users;
