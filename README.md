@@ -1,106 +1,327 @@
-Digital Garden: README
-Project Overview
+🎯 Contexte du projet
+Vous travaillez pour GreenTech Solutions, une startup qui souhaite lancer une application minimaliste et personnalisable appelée Digital Garden.
 
-Digital Garden is a minimalistic and customizable web application developed by GreenTech Solutions. It allows users to create and manage their own digital garden, where they can organize their thoughts, projects, and personal information. Users can create themes, associate notes to those themes, and manage them in an intuitive, colorful, and simple interface.
+Cette application permet à un utilisateur de créer un compte, puis de gérer un « jardin numérique » composé de :
 
-The application has full CRUD (Create, Read, Update, Delete) functionality for both Themes and Notes, with options for adding tags to themes. It features user authentication, session management, and data validation both on the client and server sides.
+Thèmes (catégories visuelles, ex : "Productivité", "Voyage", "Idées")
+Notes rattachées à un thème
+Chaque utilisateur possède son propre jardin, totalement privé.
 
-Table of Contents
+L’objectif est de permettre une organisation simple, colorée et intuitive des pensées, projets et informations personnelles.
 
-Technologies Used
+Vous êtes chargé de développer l’intégralité de l'application :
 
-Features
+✔ Backend PHP procédural
 
-Setup and Installation
+✔ Base de données SQL
 
-Database Structure
+✔ Frontend HTML + CSS + Bootstrap/Tailwind
 
-File Structure
+✔ Gestion des sessions
 
-Usage
+✔ Validation côté client (JS) et côté serveur (PHP)
 
-Security
+✔ CRUD complet sur Thèmes & Notes (Tags optionnel)
 
-Performance
+---
 
-Contributions
+🧱 Objectifs pédagogiques
+À l’issue du projet, vous devrez maîtriser :
 
-License
+🔹 Backend
+PHP procédural (conditions, fonctions, include…)
+Sessions & authentification
+Sécurité : validation, regex, requêtes préparées
+Gestion d’une relation 1:N
+Gestion d'une relation N:N (optionel)
+🔹 SQL
+Création de tables
+SELECT / INSERT / UPDATE / DELETE
+Contrainte de clé étrangère (1:N)
+Requêtes filtrées
+🔹 Frontend
+HTML5 / CSS3
+Bootstrap (formulaires, layout, badges…)
+JavaScript (validation, interactions, alertes)
+🔹 Méthodologie
+User stories
+Tâches + sous-tâches
+Utilisation de Jira
+Organisation du code & architecture simple
+---
 
-Technologies Used
+🌐 Pages à réaliser
+---
 
-Frontend:
+1. Accueil (index.php)
+Affiche :
 
-HTML5, CSS3
+Nom de l'application : Digital Garden
+Message d’introduction
+Boutons :
+✔ S’inscrire
 
-Bootstrap / Tailwind CSS (for responsive layout and components)
+✔ Se connecter
 
-JavaScript (for client-side validation and user interactions)
+Si l’utilisateur est connecté → redirection automatique vers Dashboard.
 
-Backend:
+---
 
-PHP 8 (Procedural PHP for handling business logic and server-side operations)
+2. Page d’inscription
+Formulaire avec validation JS + PHP :
 
-MySQL (for database management)
+Champs :
 
-MySQLi (for database queries and security)
+Nom d’utilisateur (obligatoire, min 3 caractères, alphanumérique)
+Mot de passe (obligatoire, min 6 caractères)
+Confirmation mot de passe
+Validation serveur + enregistrement SQL
+Stockage de la date d’inscription
+Après succès → redirection vers Dashboard.
 
-Other Tools:
+---
 
-Jira (for task management and issue tracking)
+3. Page de connexion
+Formulaire simple :
 
-Features
+Nom d’utilisateur
+Mot de passe
+Si les identifiants sont corrects :
 
-User Authentication:
+ouverture de session
+stockage de l’heure de connexion
+redirection → Dashboard
+---
 
-Secure login and registration system with password hashing.
+4. Dashboard
+Affiche :
 
-Session management to ensure only authenticated users access their digital garden.
+Bienvenue + nom d’utilisateur
+Date d’inscription
+Heure de connexion (session)
+Boutons :
+✔ Gérer mes Thèmes
 
-Themes Management:
+✔ Gérer mes Notes
 
-Create, update, and delete themes.
+✔ Déconnexion
 
-Assign a unique color to each theme.
+---
 
-Optionally add tags to themes.
+🌱 5. Page : Gestion des Thèmes
+A. Liste des thèmes
+Chaque thème affiche :
 
-View the number of notes associated with each theme.
+Nom du thème
+Couleur choisie (badge coloré) obligatoire
+Tags (multiples tags séparés par virgule, transformés en badges) (optionel)
+Nombre de notes associées
+Boutons : Modifier / Supprimer
+Si aucun thème :
 
-Notes Management:
+➡ “Aucun thème n’a encore été créé.”
 
-Create, update, and delete notes.
+---
 
-Assign notes to themes.
+B. Formulaire d’ajout / modification
+Champs :
 
-Filter notes by theme, importance (1–5), and keyword search.
+Nom du thème (obligatoire, ≥ 3 caractères)
+Couleur du thème (obligatoire – input color)
+Tags (multiples tags séparés par virgule) (optionel)
+Mode :
 
-Responsive UI:
+Par défaut → création
+En cas de modification → préremplissage + bouton “Mettre à jour”
+---
 
-The UI is designed to be responsive, making it user-friendly across devices such as desktop, tablet, and mobile.
+🍃 6. Page : Gestion des Notes
+A. Liste des notes
+Chaque note affiche :
 
-Validation:
+Titre
+Importance (1 à 5 — obligatoire)
+Contenu (extrait)
+Date de création
+Thème associé
+Boutons Modifier / Supprimer
+Filtres :
 
-Client-side validation using JavaScript.
+Par thème (sélecteur)
+Par importance
+Par mot-clé (barre de recherche)
+---
 
-Server-side validation with PHP to ensure data integrity and security.
+B. Formulaire d’ajout / modification
+Champs :
 
-Data Security:
+Thème (select — obligatoire)
+Titre (obligatoire)
+Importance (1–5 — obligatoire)
+Contenu (obligatoire)
+🔐 Règles de sécurité & redirections
+Toute page interne nécessite la connexion → redirection /login
+Un utilisateur ne peut manipuler QUE ses thèmes & notes
+Validation des deux côtés : JS + PHP
+---
 
-Prevent SQL Injection using prepared statements.
+🧩 UML requis
+À rendre avant le développement :
 
-Protection against XSS (Cross-Site Scripting) by sanitizing and encoding output.
+✔ Diagramme de cas d’usage
+✔ Diagramme de classes
+✔ (Optionnel) Diagramme de séquence – Authentification
+---
 
-Bonus Features (Optional):
+📌 Contraintes techniques
+Frontend
+HTML5 / CSS3
+Bootstrap ou Tailwind
+JS pour :
+validation
+interactions simples
+Backend
+PHP 8 procédural
+Architecture avec include
+Validation serveur
+Sessions
+Fichiers séparés (login.php, themes.php, notes.php…)
+---
 
-Dark/Light mode toggle.
+📁 Arborescence recommandée
+​
+digital-garden/
+​
+│── index.php
+​
+│── login.php
+​
+│── register.php
+​
+│── dashboard.php
+​
+│── themes.php
+​
+│── notes.php
+​
+│── config/
+​
+│     └── database.php
+​
+│── includes/
+​
+│     ├── header.php
+​
+│     ├── footer.php
+​
+│     └── auth.php
+​
+│── public/
+​
+│     ├── css/
+​
+│     └── js/
+​
+└── sql/
+​
+      └── schema.sql
+​
+​
+​
+---
 
-SweetAlert popups before deleting items.
+⭐ Fonctionnalités Bonus (optionnelles)
+Export JSON d’un thème
+Dark / Light mode
+Pagination
+Sweet Alert avant suppression
+Upload image pour un thème
+Tri personnalisé des notes
+Modalités pédagogiques
+Travail: Individuel
 
-Export themes to JSON.
+Durée de travail: 7 jours
 
-Image upload for themes.
+Date de lancement du brief : 4/12/2025 à 9:00
 
-Pagination for note listing.
+Date limite de soumission: 19/12/2025 à 23:59
 
-Sorting notes by custom parameters.
+Modalités d'évaluation
+Vous présenterez votre travail pendant 15 minutes : 
+- 5 minutes : Démonstration du conception. 
+- 10 minutes : Explication du code.
+Livrables
++ Lien de la planification des tâches avec Jira.
++ Lien vers le repository GitHub contenant :
++ README.
++ Scripts PHP fonctionnels pour toutes les fonctionnalités backend.
++ script sql.
++ UML (diagramme de cas d'utilisation, diagramme de classes).
++ Compte rendu du livrable.
++ Lien d'hébergement (facultatif)
+Critères de performance
+1. Performance de l’application
+✔ Temps de réponse
+
+Évaluer le temps de chargement des pages et des opérations (connexion, ajout, édition, suppression).
+L’application doit offrir une navigation fluide et des réponses rapides, adaptées aux attentes des utilisateurs.
+
+✔ Utilisation de la mémoire
+
+Surveiller la consommation mémoire du serveur afin d’assurer une exécution stable et une gestion optimisée des ressources lors des traitements et des requêtes.
+
+✔ Optimisation des requêtes SQL
+
+Analyser et optimiser les requêtes SQL pour réduire leur temps d’exécution.
+Limiter les requêtes redondantes, éviter les scans complets inutiles et réduire les risques de surcharge de la base de données.
+
+2. Sécurité – PHP 8 Procédural + MySQLi
+✔ Prévention des injections SQL
+
+Utiliser systématiquement des requêtes préparées (prepared statements) pour empêcher toute manipulation malveillante des données envoyées à la base.
+
+✔ Validation et assainissement des données
+
+Contrôler et nettoyer toutes les données provenant des formulaires utilisateurs afin d’empêcher les attaques XSS, l’envoi de données incorrectes ou tout comportement non désiré.
+
+✔ Protection contre les attaques XSS
+
+Encoder et filtrer les données affichées dans les pages web pour empêcher l’exécution de scripts injectés par un utilisateur malveillant.
+
+3. Bonnes pratiques – Développement PHP Procédural
+✔ Principe DRY (Don’t Repeat Yourself)
+
+Minimiser la duplication de code en centralisant les fonctionnalités communes dans des fonctions ou des fichiers inclus.
+
+✔ Modularité du code
+
+Structurer le projet en modules logiques et indépendants afin de faciliter la lisibilité, la réutilisation et la maintenance du code.
+
+✔ Conventions de nommage
+
+Utiliser des noms clairs, cohérents et explicites pour les variables, fonctions, fichiers et constantes afin d’améliorer la compréhension du code.
+
+✔ Documentation et commentaires
+
+Ajouter des commentaires utiles et informatifs pour expliquer les parties importantes du code, les algorithmes, la logique métier et les zones sensibles.
+
+✔ Gestion des erreurs
+
+Mettre en place un mécanisme fiable de gestion des erreurs (messages personnalisés, logs, redirections) permettant de détecter et traiter les anomalies sans afficher d’informations sensibles.
+
+4. Connexion à la base de données (PHP MySQLi)
+✔ Sécurité des identifiants
+
+Stocker les identifiants de connexion dans un fichier sécurisé séparé (ex. config.php) et éviter de les exposer dans le code source principal.
+
+✔ Gestion propre des connexions
+
+Ouvrir et fermer les connexions à la base uniquement lorsque nécessaire, afin de réduire la consommation de ressources et éviter les connexions persistantes inutiles.
+
+✔ Utilisation sécurisée des paramètres
+
+Employer les requêtes préparées pour toutes les opérations (SELECT, INSERT, UPDATE, DELETE) afin de renforcer la sécurité contre les injections.
+Situation professionnelle
+Concevoir et Développer la partie Back-End d'une application web
+Besoin visé ou problème rencontré
+Mettre en place un système de gestion de contenu pour un site web. Le système doit permettre aux administrateurs d'ajouter, lire, mettre à jour et supprimer des articles sur le site. De plus, l'entreprise a besoin d'un système d'authentification simple pour sécuriser l'accès aux fonctionnalités d'administration.
